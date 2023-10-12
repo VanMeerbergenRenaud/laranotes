@@ -21,7 +21,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');

@@ -14,17 +14,29 @@ use Illuminate\Support\Facades\Mail;
 
 class SendNoteCreationMailJob implements ShouldQueue
 {
+    // Ces traits permettent de fournir des fonctionnalités à la file d'attente
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function __construct(
-        public Note $note, public User $user
-    )
+    public function __construct(public Note $note, public User $user)
     {
-
+        /*
+        Les objets Note et User sont nécessaires pour envoyer
+        un e-mail de notification de création de note.
+        */
     }
 
     public function handle(): void
     {
         Mail::to($this->user)->send(new NoteCreatedMail($this->note));
+
+        /*
+        Cette méthode est appelée lorsqu'un travail en file d'attente est exécuté.
+        Dans ce cas, la méthode handle envoie un e-mail à l'utilisateur spécifié
+        ($this->user) pour informer de la création de la note. Ensuite, on
+        utilise la classe NoteCreatedMail pour composer l'e-mail.
+
+        La méthode to de Mail permet de spécifier le destinataire
+        de l'e-mail, qui est l'utilisateur associé à la note.
+        */
     }
 }

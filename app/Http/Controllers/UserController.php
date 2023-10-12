@@ -8,6 +8,10 @@ class UserController extends Controller
 {
     public function index()
     {
-        return User::all();
+        $heading = 'Listes des utilisateurs';
+
+        $users = User::all();
+
+        return view('pages.users', compact('heading', 'users'));
     }
 }

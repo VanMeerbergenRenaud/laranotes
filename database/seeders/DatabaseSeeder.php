@@ -21,9 +21,10 @@ class DatabaseSeeder extends Seeder
              'email' => 'renaud.vmb@gmail.com',
          ]);
 
-         Note::factory(100)->create();
+         Note::factory(20)->create();
     }
 }
 
 // Migrer la db au début : php artisan migrate
 // Actualisé la db avec la commande : php artisan db:seed
+// Faire tout : php artisan migrate --seed

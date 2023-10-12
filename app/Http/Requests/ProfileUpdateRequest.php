@@ -19,5 +19,11 @@ class ProfileUpdateRequest extends FormRequest
             'name' => ['string', 'max:255'],
             'email' => ['email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
         ];
+
+        /*
+        Rule::unique est utilisé pour ignorer l'unicité pour l'utilisateur actuellement
+        connecté (ce qui permet à cet utilisateur de conserver son adresse e-mail
+        lors de la mise à jour du profil).
+        */
     }
 }

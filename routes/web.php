@@ -19,13 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('/users', [UserController::class, 'index']);
 
-/*Route::get('/login', [ProfileController::class, 'edit']);
-Route::get('/register', [AuthenticatedSessionController::class, 'create']);*/
-
+// Ces routes permettent à un utilisateur de s'enregistrer ou se connecter
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
@@ -38,6 +36,7 @@ Route::middleware('guest')->group(function () {
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 });
 
+// Ces routes servent à afficher le profil de l'utilisateur et à le déconnecter
 Route::middleware('auth')->group(function () {
     Route::resource('notes', NotesController::class); // Charge toutes les routes d'un controllers avec les 7 méthodes
 
@@ -45,16 +44,10 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 });
 
+// Cette route 'Job' ajoute une tâche asynchrone à la file d'attente de travaux
 Route::get('/job', function() {
     dispatch(function() {
        logger('hello');
     });
 });
-// Voir la liste des routes => php artisan route:list (méthode http, url)
-
-// Commande de query depuis le terminal => php artisan tinker
-// User::where('email', 'like', 'domi%') => QueryBuilder
-// User::where('email', 'like', 'domi%')->get(); // Quand c'est une query on utilise get
-// User::where('email', 'like', 'domi%')->get()->first(); // Créer le premier item d'une collection
-// User::where('email', 'like', 'domi%')->first(); // Méthode de queryBuilder, retourne le premier tableau trouvé
 

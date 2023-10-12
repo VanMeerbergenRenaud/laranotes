@@ -12,7 +12,8 @@ class Note extends Model
 
     protected $fillable = ['description', 'user_id', 'image_url'];
 
-    public function user():BelongsTo {
+    public function user():BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 }

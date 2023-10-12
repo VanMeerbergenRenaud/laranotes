@@ -44,11 +44,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function notes(): HasMany
+    public function notes():HasMany
     {
         return $this->hasMany(Note::class);
     }
 }
-
-// ORM : Mets en relation des objets avec des entités de la base de donnée
-// ORM de Laravel : Eloquent ORM -> documenter vers le Query Builder qui est la base de l'ORM

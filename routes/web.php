@@ -50,11 +50,11 @@ Route::get('/job', function() {
        logger('hello');
     });
 });
-// Voir la liste des routes => php artisan route: list (méthode http, url)
+// Voir la liste des routes => php artisan route:list (méthode http, url)
 
 // Commande de query depuis le terminal => php artisan tinker
 // User::where('email', 'like', 'domi%') => QueryBuilder
-// User::where('email', 'like', 'domi%')->get();
+// User::where('email', 'like', 'domi%')->get(); // Quand c'est une query on utilise get
 // User::where('email', 'like', 'domi%')->get()->first(); // Créer le premier item d'une collection
 // User::where('email', 'like', 'domi%')->first(); // Méthode de queryBuilder, retourne le premier tableau trouvé
 

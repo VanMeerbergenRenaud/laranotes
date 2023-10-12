@@ -5,30 +5,20 @@ namespace App\Http\Controllers;
 use App\Events\NoteCreatedEvent;
 use App\Http\Requests\StoreNoteRequest;
 use App\Http\Requests\UpdateNoteRequest;
-use App\Mail\NoteCreatedMail;
 use App\Models\Note;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Mail;
-use Mockery\Matcher\Not;
 
 class NotesController extends Controller
 {
     public function index()
     {
         $user = Auth::user();
-        /*$user = auth()->user(); idem */
-//        $notes = $user->notes; // CMD + clic sur note
-        $user->load('notes'); // Charge toutes les données de la requête et ça permet d'avoir le user et ses notes
+
+        $user->load('notes');
 
         $heading = 'Note of ' . $user->name;
-
-        // return Note::all(); // retourne toutes les notes de la db
-        // return $user->notes()->first(); // reprend le 1er élément de la requête du user
-        // return $user->first();  // reprend le 1er élément du tableau entier Notes du user
 
         return view('notes.index', compact('heading', 'user'));
     }
@@ -41,35 +31,9 @@ class NotesController extends Controller
 
     public function store(StoreNoteRequest $request): RedirectResponse
     {
-        /*
-        $validated = $request->validate([
-            'description' => 'required',
-            'image_url' => 'required',
-            'user_id' => 'exists:users,id',
-        ]);
-        */
-
-        /*$description = $validated('description');*/
-
-        /*
-        $description = $request->input('description');
-        $note = new Note();
-        $note->description = $description;
-        $note->image_url = '';
-        $note->user_id = User::whereEmail('renaud.vmb@gmail.com')->first()->id;
-        $note->save();
-        */
-
-        /*
-        $image_url = '';
-        $user_id = 21;
-        Note::create(compact('description', 'user_id', 'image_url'));
-        */
-
-        // $validated['user_id'] = Auth::id();
-        // Note::create($validated);
-
         $note = Auth::user()->notes()->save(new Note($request->validated())); // https://laravel.com/docs/10.x/eloquent-relationships#inserting-and-updating-related-models
+
+        $request->file('image_url')->store('img');
 
         NoteCreatedEvent::dispatch($note);
 

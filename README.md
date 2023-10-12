@@ -20,7 +20,7 @@ Ce projet s’en inspire pour le cours de Projet Web, afin de pouvoir aussi s'y 
 
 Pour commencer à utiliser Laranotes, suivez ces étapes :
 
-1. Clonez le dépôt sur votre machine locale ou fork du projet.
+1. Clonez le dépôt sur votre machine locale ou forker le projet.
 
 2. Exécutez les commandes suivantes dans le terminal :
     - `$ composer install`

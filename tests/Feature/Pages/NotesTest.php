@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Note;
 use App\Models\User;
 use function Pest\Laravel\actingAs;
 use function Pest\Laravel\get;
@@ -18,18 +17,24 @@ it('allows an authenticated user to access the index of notes', function () {
 });
 
 it('forbids an authenticated user to access the index of notes from another user', function () {
-    // Arrange // trouver un autre indicateur qui permet de savoir si la note apppartient à un autre utilisateur avec un text associé dedans
+    // Arrange
     $renaud = User::factory()
-        ->has(Note::factory())->create([
+        ->hasNotes(1, [
+            'description' => 'note of Renaud',
+        ])->create([
             'name' => 'Renaud'
         ]);
 
     $dominique = User::factory()
-        ->has(Note::factory())->create([
+        ->hasNotes(1, [
+            'description' => 'note of Dominique',
+        ])->create([
             'name' => 'Dominique'
         ]);
 
-    // Act
-
-    // Assert
+    // Act & Assert
+    actingAs($renaud)
+        ->get(route('notes.index'))
+        ->assertSee('note of Renaud')
+        ->assertDontSee('note of Dominique');
 });

@@ -5,6 +5,7 @@
 
 use App\Models\User;
 use function Pest\Laravel\actingAs;
+use function Pest\Laravel\get;
 
 /*it('shows the user profil for every one', function () {
     // Arrange
@@ -36,12 +37,31 @@ it('shows the user profil only for the person who is an authenticated user or an
         'is_admin' => true
     ]);
 
+    get(route('users.index'))
+        ->assertRedirect(route('login'));
+
     // Act & Assert
     actingAs($user)
         ->get(route('users.index'))
-        ->assertRedirect('login');
+        ->assertForbidden();
 
     actingAs($admin)
         ->get(route('users.index'))
+        ->assertOk();
+});
+
+it('shows the user profil only for the admin user and his corresponding views', function () {
+    // Arrange
+    $admin = User::factory()->create([
+        'is_admin' => true
+    ]);
+
+    $user = User::factory()->create();
+
+    // Act & Assert
+    actingAs($admin)
+        ->get(route('users.show', [
+            'user' => $user->id
+        ]))
         ->assertOk();
 });

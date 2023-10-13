@@ -10,6 +10,7 @@
             <div class="px-4 py-6 sm:px-0">
                 <div class="bg-white rounded-lg p-8 shadow-md">
                     <h2 class="text-xl font-semibold mb-4">{{ $user->name }}</h2>
+                    <p class="text-l">{{ $user->email }}</p>
                 </div>
                 <div class="mt-6 flex items-center">
                     <form action="/users/{{ $user->id }}" method="post">

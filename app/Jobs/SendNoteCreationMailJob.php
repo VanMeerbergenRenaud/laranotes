@@ -22,6 +22,10 @@ class SendNoteCreationMailJob implements ShouldQueue
         /*
         Les objets Note et User sont nécessaires pour envoyer
         un e-mail de notification de création de note.
+
+        Si votre tâche en file d'attente accepte un modèle Eloquent
+        dans son constructeur, seul l'identifiant du modèle sera
+        sérialisé dans la file d'attente.
         */
     }
 
@@ -30,7 +34,7 @@ class SendNoteCreationMailJob implements ShouldQueue
         Mail::to($this->user)->send(new NoteCreatedMail($this->note));
 
         /*
-        Cette méthode est appelée lorsqu'un travail en file d'attente est exécuté.
+        Cette méthode est appelée lorsqu'un job en file d'attente est exécuté.
         Dans ce cas, la méthode handle envoie un e-mail à l'utilisateur spécifié
         ($this->user) pour informer de la création de la note. Ensuite, on
         utilise la classe NoteCreatedMail pour composer l'e-mail.

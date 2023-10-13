@@ -10,7 +10,7 @@
             <!-- Replace with your content -->
             <div class="px-4 py-6 sm:px-0">
                 <div class="rounded-lg border-4 border-dashed border-gray-200">
-                    <h1 class="mx-auto max-w-7xl py-6 text-2xl font-bold text-center">Page des utilisateurs</h1>
+                    <h1 class="mx-auto max-w-7xl py-6 pl-4 text-2xl font-bold">Page des utilisateurs</h1>
                     <ul>
                         @foreach ($users as $user)
                             <li class="p-4 border-b border-gray-300">

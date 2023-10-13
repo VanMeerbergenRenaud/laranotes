@@ -1,19 +1,16 @@
 <?php
 
-namespace Tests\Feature;
+use function Pest\Laravel\get;
 
-// use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+it('returns a successful response when visiting home route', function () {
+    get('/')->assertOk();
+});
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic test example.
-     */
-    public function test_the_application_returns_a_successful_response(): void
-    {
-        $response = $this->get('/');
+// Raccourci : ctrl+maj+r
 
-        $response->assertStatus(200);
-    }
-}
+// test ou it
+
+// Triple A :
+// 1. Arranger des données
+// 2. Agir, faire fonctionner la fonctionnalité que l'on souhaite tester
+// 3. Assertion (affirmation hypothétique)

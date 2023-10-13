@@ -9,7 +9,7 @@
         <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <div class="px-4 py-6 sm:px-0">
                 <div class="bg-white rounded-lg p-8 shadow-md">
-                    <h2 class="text-2xl font-semibold mb-4">{{ htmlspecialchars($note->description) }}</h2>
+                    <h2 class="text-xl font-semibold mb-4">{{ htmlspecialchars($note->description) }}</h2>
                     <p class="text-gray-600">Created by: {{ $note->user->name }}</p>
                 </div>
                 <div class="mt-6 flex items-center">

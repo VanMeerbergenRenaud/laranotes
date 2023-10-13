@@ -10,11 +10,11 @@
             <!-- Replace with your content -->
             <div class="px-4 py-6 sm:px-0">
                 <div class="rounded-lg border-4 border-dashed border-gray-200 p-6 shadow-lg">
-                    <h1 class="text-3xl font-semibold mb-4">Ma Collection de Livres 📚</h1>
+                    <h1 class="text-2xl font-semibold mb-4">Ma Collection de Livres 📚</h1>
                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                         @forelse ($books as $book)
                             <div class="bg-gray-100 p-4 rounded-lg border border-gray-300">
-                                <h2 class="text-xl font-semibold mb-2">{{$book["title"]}}</h2>
+                                <h2 class="text-l font-semibold mb-2">{{$book["title"]}}</h2>
                                 <p class="text-gray-600">Écrit par : {{$book["author"] }}</p>
                             </div>
                         @empty

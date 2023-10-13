@@ -12,7 +12,9 @@
                         <a href="/about" class="{{ request()->path() === ('/about') ? config()->get('styles.nav-active') : config()->get('styles.nav-inactive') }} px-3 py-2 rounded-md text-sm font-medium">About</a>
                         <a href="/contact" class="{{ request()->path() === ('/contact') ? config()->get('styles.nav-active') : config()->get('styles.nav-inactive') }} px-3 py-2 rounded-md text-sm font-medium">Contact</a>
                         <a href="/notes" class="{{ request()->path() === ('/notes') ? config()->get('styles.nav-active') : config()->get('styles.nav-inactive') }} px-3 py-2 rounded-md text-sm font-medium">Notes</a>
-                        <a href="/users" class="{{ request()->path() === ('/users') ? config()->get('styles.nav-active') : config()->get('styles.nav-inactive') }} px-3 py-2 rounded-md text-sm font-medium">Users</a>
+                        @can('manage-users')
+                            <a href="/users" class="{{ request()->path() === ('/users') ? config()->get('styles.nav-active') : config()->get('styles.nav-inactive') }} px-3 py-2 rounded-md text-sm font-medium">Users</a>
+                        @endcan
                     </div>
                 </div>
             </div>

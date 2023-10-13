@@ -25,6 +25,7 @@ Pour commencer à utiliser Laranotes, suivez ces étapes :
 2. Exécutez les commandes suivantes dans le terminal :
     - `$ composer install`
     - `$ php artisan migrate --seed`
+    - `$ php artisan migrate:refresh --seed`
     - `$ php artisan serve`
 
 Vous êtes maintenant prêt à explorer Laranotes !

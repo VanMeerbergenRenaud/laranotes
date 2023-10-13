@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 
@@ -30,26 +31,44 @@ class UsersController extends Controller
     {
         $heading = 'See you admin account/profile';
 
-        if (!Gate::allows('manage-users')) {
+        if (!Gate::allows('manage-users', $user)) {
             abort(403);
         }
 
         return view('pages.users.show', compact('heading', 'user'));
     }
 
-    public function edit()
+    public function edit(User $user)
     {
+        if (!Gate::allows('manage-users', $user)) {
+            abort(403);
+        }
 
+        $heading = 'Edit your profil';
+
+        return view('pages.users.edit', compact('heading', 'user'));
     }
 
 
-    public function update()
+    public function update(UpdateUserRequest $request, User $user)
     {
+        if (!Gate::allows('manage-users', $user)) {
+            abort(403);
+        }
 
+        $user->update($request->validated());
+
+        return redirect('/users/' . $user->id);
     }
 
-    public function destroy()
+    public function destroy(User $user)
     {
+        if (!Gate::allows('manage-users', $user)) {
+            abort(403);
+        }
 
+        /*$user->delete();*/
+
+        return redirect('/users');
     }
 }

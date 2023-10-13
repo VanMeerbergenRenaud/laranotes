@@ -64,4 +64,10 @@ it('shows the user profil only for the admin user and his corresponding views', 
             'user' => $user->id
         ]))
         ->assertOk();
+
+    actingAs($admin)
+        ->get(route('users.edit', [
+            'user' => $user->id
+        ]))
+        ->assertOk();
 });

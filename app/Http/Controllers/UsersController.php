@@ -67,7 +67,18 @@ class UsersController extends Controller
             abort(403);
         }
 
-        /*$user->delete();*/
+        $user->update(['suspended' => true]); // Compte suspendu
+
+        return redirect('/users');
+    }
+
+    public function unsuspend(User $user)
+    {
+        if (!Gate::allows('manage-users', $user)) {
+            abort(403);
+        }
+
+        $user->update(['suspended' => false]); // Réactivation du compte
 
         return redirect('/users');
     }

@@ -27,6 +27,7 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 // Route de l'admin
 Route::middleware(['admin'])->group(function () {
     Route::resource('users', UsersController::class);
+    Route::post('/users/{user}/unsuspend', 'App\Http\Controllers\UsersController@unsuspend')->name('users.unsuspend');
 });
 
 // Ces routes permettent à un utilisateur de s'enregistrer ou se connecter

@@ -1,7 +1,4 @@
 <?php
-// fonctionnalité de user suspended en plus
-// => state dans factory
-// => scope dans les models
 
 use App\Models\User;
 use function Pest\Laravel\actingAs;
@@ -70,4 +67,28 @@ it('shows the user profil only for the admin user and his corresponding views', 
             'user' => $user->id
         ]))
         ->assertOk();
+});
+
+it('suspends the user when the admin click on delete the user profil', function () {
+    // fonctionnalité de user suspendu en plus
+    // => state dans factory
+    // => scope dans les models
+
+    $admin = User::factory()->create([
+        'is_admin' => true
+    ]);
+
+    $user = User::factory()->create();
+
+    actingAs($admin)
+        ->post(route('users.suspended', [
+            'user' => $user->id
+        ]))
+        ->assertSee('user');
+
+    actingAs($user)
+        ->get(route('users.show', [
+            'user' => $user->id
+        ]))
+        ->assertForbidden();
 });
